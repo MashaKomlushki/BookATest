@@ -7,10 +7,11 @@ import org.openqa.selenium.support.PageFactory;
 import rs.booka.pages.AccountPage;
 
 public class TopMenu {
-    WebDriver driver;
 
+    WebDriver driver;
     public TopMenu(WebDriver driver){
 
+        this.driver = driver;
         PageFactory.initElements(driver, this);
     }
 
@@ -74,7 +75,6 @@ public class TopMenu {
         prijaviSe.click();
         return new AccountPage(driver);
     }
-
     public void gotoKorpa() {
         korpa.click();
     }
