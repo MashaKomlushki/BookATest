@@ -1,18 +1,16 @@
 package rs.booka;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
+import java.time.Duration;
+
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
-import java.time.Duration;
-
 public class BaseTest {
 
-    public WebDriver driver;
-    public WebDriverWait wait;
+    protected WebDriver driver;
+    protected WebDriverWait wait;
 
     @Test
     public void setUp(){
@@ -25,6 +23,5 @@ public class BaseTest {
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         driver.get("https://www.booka.rs/");
     }
-
 
 }
