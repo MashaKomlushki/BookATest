@@ -1,5 +1,0 @@
-INFO    2023-03-09 22:57:37,475 [main] rs.booka.base.BaseTest  - Config file loaded !!!
-INFO    2023-03-09 22:57:37,475 [main] rs.booka.base.BaseTest  - OR properties loaded !!!
-INFO    2023-03-09 22:57:51,276 [main] rs.booka.base.BaseTest  - Launching Chrome!!!
-INFO    2023-03-09 22:57:56,043 [main] rs.booka.base.BaseTest  - Navigated to : https://www.booka.rs/
-INFO    2023-03-09 22:58:07,105 [main] rs.booka.base.BaseTest  - Test Execution completed !!!
