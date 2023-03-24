@@ -1,11 +1,17 @@
 package rs.booka;
 
 import java.time.Duration;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
@@ -39,9 +45,24 @@ public class BaseTest {
     
     private WebDriver loadWebdriver(String browser) {
     	if("firefox".equalsIgnoreCase(browser)) {
-    		return new FirefoxDriver();
+
+            FirefoxOptions options = new FirefoxOptions();
+            options.addArguments("--disable-extensions");
+            options.addArguments("--disable-infobars");
+            options.setHeadless(true);
+
+    		return new FirefoxDriver(options);
     	}
-    	return new ChromeDriver();
+        Map<String, Object> prefs = new HashMap<String, Object>();
+        prefs.put("profile.default_content_setting_values.notifications", 2);
+        prefs.put("credentials_enable_service", false);
+        prefs.put("profile.password_manager_enabled", false);
+        ChromeOptions options = new ChromeOptions();
+        options.setExperimentalOption("prefs", prefs);
+        options.addArguments("--disable-extensions");
+        options.addArguments("--disable-infobars");
+        options.addArguments("headless");
+    	return new ChromeDriver(options);
     }
 
     @AfterMethod
