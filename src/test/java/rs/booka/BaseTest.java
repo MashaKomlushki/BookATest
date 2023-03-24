@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -31,9 +32,9 @@ public class BaseTest {
         driver = loadWebdriver(browser);
         
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        driver.get("https://www.booka.rs/");
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Integer.parseInt(generalSettings.getString("implicit.wait"))));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(Integer.parseInt(generalSettings.getString("explicit.wait"))));
+        driver.get(generalSettings.getString("baseURL"));
     }
     
     private WebDriver loadWebdriver(String browser) {
@@ -41,6 +42,13 @@ public class BaseTest {
     		return new FirefoxDriver();
     	}
     	return new ChromeDriver();
+    }
+
+    @AfterMethod
+
+    public void tearDown(){
+
+        driver.quit();
     }
 
 }
