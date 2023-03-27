@@ -1,17 +1,13 @@
 package rs.booka;
 
 import java.time.Duration;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.firefox.FirefoxProfile;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
@@ -44,31 +40,34 @@ public class BaseTest {
     }
     
     private WebDriver loadWebdriver(String browser) {
-    	if("firefox".equalsIgnoreCase(browser)) {
+        Map<String, Object> prefs = new HashMap<String, Object>();
+        prefs.put("profile.default_content_setting_values.notifications", 2); //to disable browser notifications
+        prefs.put("credentials_enable_service", false);
+        prefs.put("profile.password_manager_enabled", false); //to disable the save password popup
+
+        List<String> driverArgs = Arrays.asList("--disable-extensions", "--disable-infobars", "--headless");
+
+
+        if("firefox".equalsIgnoreCase(browser)) {
 
             FirefoxOptions options = new FirefoxOptions();
-            options.addArguments("--disable-extensions");
-            options.addArguments("--disable-infobars");
-            options.setHeadless(true);
 
-    		return new FirefoxDriver(options);
+            options.addArguments(driverArgs);
+            prefs.forEach((key, value)->{
+                options.addPreference(key, value);
+            });
+            return new FirefoxDriver(options);
     	}
-        Map<String, Object> prefs = new HashMap<String, Object>();
-        prefs.put("profile.default_content_setting_values.notifications", 2);
-        prefs.put("credentials_enable_service", false);
-        prefs.put("profile.password_manager_enabled", false);
+
         ChromeOptions options = new ChromeOptions();
         options.setExperimentalOption("prefs", prefs);
-        options.addArguments("--disable-extensions");
-        options.addArguments("--disable-infobars");
-        options.addArguments("headless");
+        options.addArguments(driverArgs);
+
     	return new ChromeDriver(options);
     }
 
     @AfterMethod
-
     public void tearDown(){
-
         driver.quit();
     }
 
