@@ -11,6 +11,7 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class BaseTest {
@@ -27,7 +28,7 @@ public class BaseTest {
         
 	}
 
-    @Test
+    @BeforeMethod
     void setUp(){
     	String browser = generalSettings.getString("browser");
     
@@ -45,7 +46,9 @@ public class BaseTest {
         prefs.put("credentials_enable_service", false);
         prefs.put("profile.password_manager_enabled", false); //to disable the save password popup
 
-        List<String> driverArgs = Arrays.asList("--disable-extensions", "--disable-infobars", "--headless");
+
+        List<String> driverArgs = Arrays
+                .asList(generalSettings.getString("extensions"), generalSettings.getString("infobars"), generalSettings.getString("headless.mode"));
 
 
         if("firefox".equalsIgnoreCase(browser)) {
