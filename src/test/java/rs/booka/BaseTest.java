@@ -3,6 +3,8 @@ package rs.booka;
 import java.time.Duration;
 import java.util.*;
 
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -20,7 +22,7 @@ public class BaseTest {
     protected WebDriverWait wait;
     
 	protected static ResourceBundle generalSettings = ResourceBundle.getBundle("general-settings");
-	
+	public static Logger log = Logger.getLogger(BaseTest.class);
 	@BeforeClass
 	static void initTests() {
         //dodato zbog greske sa Chrome driverom
@@ -30,14 +32,16 @@ public class BaseTest {
 
     @BeforeMethod
     void setUp(){
+        PropertyConfigurator.configure("src/main/resources/log4j.properties");
     	String browser = generalSettings.getString("browser");
     
         driver = loadWebdriver(browser);
-        
+        log.info("Browser launched");
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Integer.parseInt(generalSettings.getString("implicit.wait"))));
         wait = new WebDriverWait(driver, Duration.ofSeconds(Integer.parseInt(generalSettings.getString("explicit.wait"))));
         driver.get(generalSettings.getString("baseURL"));
+        log.info("Navigated to " + generalSettings.getString("baseURL"));
     }
     
     private WebDriver loadWebdriver(String browser) {
@@ -71,7 +75,9 @@ public class BaseTest {
 
     @AfterMethod
     public void tearDown(){
+
         driver.quit();
+        log.info("Test execution completed");
     }
 
 }

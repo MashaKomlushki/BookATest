@@ -4,10 +4,10 @@ import base.BaseMenu;
 import org.testng.annotations.Test;
 
 
-public class GiftTest extends BaseTest{
+public class GiftLinkTest extends BaseTest{
 
     @Test
-    public void testGift(){
+    public void testGiftLink(){
         BaseMenu base = new BaseMenu(driver);
         base.goToGift();
     }
