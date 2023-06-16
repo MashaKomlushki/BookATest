@@ -14,6 +14,7 @@
 		<testNG.version>7.7.1</testNG.version>
 		<webdrivermanager.version>5.3.2</webdrivermanager.version>
 		<log4j.version>1.2.17</log4j.version>
+		<commons.csv>1.10.0</commons.csv>
 	</properties>
 
 	<build>
@@ -57,6 +58,13 @@
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 			<version>${log4j.version}</version>
+		</dependency>
+
+		<!--dodato za citanje csv fajlova -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-csv</artifactId>
+			<version>${commons.csv}</version>
 		</dependency>
 
 	</dependencies>

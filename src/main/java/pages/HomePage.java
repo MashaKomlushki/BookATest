@@ -1,9 +1,10 @@
 package pages;
-
 import base.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+
 
 public class HomePage extends BasePage {
     public HomePage(WebDriver driver) {
@@ -26,10 +27,15 @@ public class HomePage extends BasePage {
         signIn.click();
     }
 
-    public void signIn(){
+    /*public void signIn(){
         username.sendKeys("mama.komlumku18@gmail.com");
         password.sendKeys("ZaTest183!");
         loginBtn.click();
+    }*/
 
+    public void signIn(String Username, String Password) {
+        username.sendKeys(Username);
+        password.sendKeys(Password);
+        loginBtn.click();
     }
 }

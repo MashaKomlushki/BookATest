@@ -3,7 +3,7 @@ package rs.booka;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class FirstTest extends BaseTest{
+public class ValidateWebsiteTest extends BaseTest{
 
 @Test
     public void validateWebsite() {
