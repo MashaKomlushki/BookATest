@@ -1,6 +1,7 @@
 package rs.booka;
 
 import org.testng.Assert;
+import org.testng.Reporter;
 import org.testng.annotations.Test;
 
 public class ValidateWebsiteTest extends BaseTest{
@@ -10,7 +11,7 @@ public class ValidateWebsiteTest extends BaseTest{
 
     driver.get(generalSettings.getString("baseURL"));
     String URL = driver.getCurrentUrl();
-    Assert.assertEquals(URL, generalSettings.getString("baseURL") );
+    Assert.assertEquals(URL, generalSettings.getString("baseURL"));
 
     }
 

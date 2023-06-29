@@ -1,8 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="rs.booka">
+    <listeners>
+        <listener class-name="utilities.CustomListeners"/>
+    </listeners>
+
     <test name="First test">
         <classes>
-            <class name="rs.booka.FirstTest"/>
+            <class name="rs.booka.ValidateWebsiteTest"></class>
         </classes>
     </test>
+
+    <test name="Login Test">
+        <classes>
+            <class name="rs.booka.LoginTest"></class>
+        </classes>
+    </test>
+
+
 </suite>
